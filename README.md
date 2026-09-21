@@ -1,5 +1,11 @@
 # Pendulum Generative Art
 
+## Live Demo
+
+Try the interactive application here:
+
+https://pendulum-generative-art.streamlit.app
+
 An interactive generative-art project that transforms the motion of nonlinear pendulum systems into visual trajectories.
 
 The project combines mathematical modeling, numerical simulation, and visual design. Users can modify physical parameters and observe how the motion and resulting artwork change.
