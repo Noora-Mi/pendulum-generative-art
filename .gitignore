@@ -1,0 +1,39 @@
+# macOS system files
+.DS_Store
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Streamlit private configuration
+.streamlit/secrets.toml
+
+# Generated animation files
+animations/
+*.mp4
+
+# Temporary files
+*.tmp
+*.log
+
+# Local agent configuration
+.agents/
+
+# macOS folder icon metadata
+Icon?
+
+# Generated experiment figures
+figures/
+*.png
+
+# Keep selected README images
+!assets/
+!assets/*.png
+
+
