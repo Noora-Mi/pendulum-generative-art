@@ -7,6 +7,7 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 from threading import RLock
 
+from io import BytesIO
 import matplotlib.pyplot as plt
 import streamlit as st
 
@@ -275,10 +276,34 @@ if model_choice == "Single Pendulum":
                     )
                 )
 
+                single_png_buffer = BytesIO()
+
+                single_figure.savefig(
+                    single_png_buffer,
+                    format="png",
+                    dpi=300,
+                    bbox_inches="tight"
+                )
+
+                single_png_bytes = (
+                    single_png_buffer.getvalue()
+                )
+
                 st.pyplot(
                     single_figure,
                     width="stretch"
                 )
+
+                st.download_button(
+                    label="Download Single-Pendulum PNG",
+                    data=single_png_bytes,
+                    file_name=(
+                        "single_pendulum_artwork.png"
+                    ),
+                    mime="image/png"
+                )
+
+                single_png_buffer.close()
 
                 plt.close(
                     single_figure
@@ -540,15 +565,38 @@ else:
                     )
                 )
 
+                double_png_buffer = BytesIO()
+
+                double_figure.savefig(
+                    double_png_buffer,
+                    format="png",
+                    dpi=300,
+                    bbox_inches="tight"
+                )
+
+                double_png_bytes = (
+                    double_png_buffer.getvalue()
+                )
+
                 st.pyplot(
                     double_figure,
                     width="stretch"
                 )
 
+                st.download_button(
+                    label="Download Double-Pendulum PNG",
+                    data=double_png_bytes,
+                    file_name=(
+                        "double_pendulum_artwork.png"
+                    ),
+                    mime="image/png"
+                )
+
+                double_png_buffer.close()
+
                 plt.close(
                     double_figure
                 )
-
         # ----------------------------------------------------
         # Animated artwork
         # ----------------------------------------------------
