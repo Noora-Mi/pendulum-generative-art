@@ -10,6 +10,17 @@ An interactive generative-art project that transforms the motion of nonlinear pe
 
 The project combines mathematical modeling, numerical simulation, and visual design. Users can modify physical parameters and observe how the motion and resulting artwork change.
 
+## Artwork Preview
+
+### Single Pendulum
+
+![Single-pendulum generative artwork](assets/single_pendulum_artwork.png)
+
+### Double Pendulum
+
+![Double-pendulum generative artwork](assets/double_pendulum_artwork.png)
+
+
 ## Features
 
 - Interactive Streamlit interface
