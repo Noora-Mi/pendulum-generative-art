@@ -49,7 +49,11 @@ def create_segments(
 
 def create_single_pendulum_figure(
     results,
-    color_map_name="turbo"
+    color_map_name="turbo",
+    minimum_line_width=0.6,
+    maximum_line_width=3.6,
+    minimum_alpha=0.20,
+    maximum_alpha=1.00
 ):
     """
     Create a static physical-space and phase-space figure.
@@ -99,10 +103,27 @@ def create_single_pendulum_figure(
         maximum_speed = 1.0
 
     segment_widths = (
-        0.6
-        + 3.0
+        minimum_line_width
+        + (maximum_line_width - minimum_line_width)
         * np.abs(omega_values[:-1])
         / maximum_speed
+    )
+
+    parameters = results["parameters"]
+    critical_energy = (
+        2.0
+        * parameters["mass"]
+        * parameters["g"]
+        * parameters["length"]
+    )
+    energy_ratio = max(
+        0.0,
+        results["initial_total_energy"] / critical_energy
+    )
+    energy_intensity = energy_ratio / (1.0 + energy_ratio)
+    trajectory_alpha = (
+        minimum_alpha
+        + (maximum_alpha - minimum_alpha) * energy_intensity
     )
 
     physical_segments = create_segments(
@@ -120,7 +141,7 @@ def create_single_pendulum_figure(
         cmap=color_map,
         norm=color_normalization,
         linewidths=segment_widths,
-        alpha=0.9
+        alpha=trajectory_alpha
     )
 
     physical_trajectory.set_array(
@@ -132,7 +153,7 @@ def create_single_pendulum_figure(
         cmap=color_map,
         norm=color_normalization,
         linewidths=segment_widths,
-        alpha=0.9
+        alpha=trajectory_alpha
     )
 
     phase_trajectory.set_array(
@@ -338,7 +359,11 @@ def create_single_pendulum_animation(
     results,
     frame_skip=3,
     interval=None,
-    color_map_name="turbo"
+    color_map_name="turbo",
+    minimum_line_width=0.6,
+    maximum_line_width=3.6,
+    minimum_alpha=0.20,
+    maximum_alpha=1.00
 ):
     """
     Create synchronized physical-space and phase-space
@@ -412,10 +437,27 @@ def create_single_pendulum_animation(
     )
 
     segment_widths = (
-        0.6
-        + 3.0
+        minimum_line_width
+        + (maximum_line_width - minimum_line_width)
         * np.abs(omega_values[:-1])
         / maximum_speed
+    )
+
+    parameters = results["parameters"]
+    critical_energy = (
+        2.0
+        * parameters["mass"]
+        * parameters["g"]
+        * parameters["length"]
+    )
+    energy_ratio = max(
+        0.0,
+        results["initial_total_energy"] / critical_energy
+    )
+    energy_intensity = energy_ratio / (1.0 + energy_ratio)
+    trajectory_alpha = (
+        minimum_alpha
+        + (maximum_alpha - minimum_alpha) * energy_intensity
     )
 
     # Create the two-panel figure.
@@ -522,7 +564,7 @@ def create_single_pendulum_animation(
         [],
         cmap=color_map,
         norm=color_normalization,
-        alpha=0.9,
+        alpha=trajectory_alpha,
         zorder=2
     )
 
@@ -602,7 +644,7 @@ def create_single_pendulum_animation(
         [],
         cmap=color_map,
         norm=color_normalization,
-        alpha=0.9,
+        alpha=trajectory_alpha,
         zorder=2
     )
 

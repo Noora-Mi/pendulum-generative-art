@@ -410,3 +410,5 @@ def simulate_single_pendulum_degrees(
     )
 
     return results
+
+
